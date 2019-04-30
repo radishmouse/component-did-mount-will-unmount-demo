@@ -6,7 +6,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      shouldShowWidget: true
+      shouldShowWidget: true,
+      widgetState: 0
     };
   }
   render() {
@@ -16,7 +17,14 @@ class App extends React.Component {
         {/* no anon func, since no custom args passed to _toggleShowWidget */}
         <button onClick={this._toggleShowWidget}
         >flip it</button>
-        { this.state.shouldShowWidget ? <Widget /> : 'nada' }        
+        { 
+          this.state.shouldShowWidget 
+            ? <Widget 
+                  saveState={this._saveWidgetState}
+                  startingValue={this.state.widgetState}
+              /> 
+            : 'nada' 
+        }        
       </div>
     );
   }
@@ -31,6 +39,14 @@ class App extends React.Component {
   _toggleShowWidget = () => {
     this.setState({
       shouldShowWidget: !this.state.shouldShowWidget
+    });
+  }
+
+  _saveWidgetState = (widgetState) => {
+    this.setState({
+      widgetState
+    }, () => {
+      console.log('App: _saveWidgetState');
     });
   }
 

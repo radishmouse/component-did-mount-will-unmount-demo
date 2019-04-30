@@ -7,7 +7,7 @@ class Widget extends React.Component {
         super(props);
         console.log('Widget: constructor');
         this.state = {
-            aNumber: 0
+            aNumber: props.startingValue
         }
     }
 
@@ -23,6 +23,7 @@ class Widget extends React.Component {
     componentWillUnmount() {        
         console.log('Widget: componentWillUnmount');
         clearInterval(this.interval);
+        this.props.saveState(this.state.aNumber);
     }
         
     render() {
