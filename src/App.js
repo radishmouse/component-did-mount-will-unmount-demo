@@ -1,26 +1,40 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Widget from './Widget';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      shouldShowWidget: true
+    };
+  }
+  render() {
+    console.log('App: render');
+    return (
+      <div className="App">
+        {/* no anon func, since no custom args passed to _toggleShowWidget */}
+        <button onClick={this._toggleShowWidget}
+        >flip it</button>
+        { this.state.shouldShowWidget ? <Widget /> : 'nada' }        
+      </div>
+    );
+  }
+
+  componentDidMount() {
+    console.log('App: componentDidMount');
+  }
+  componentWillUnmount() {
+    console.log('App: componentWillUnmount');
+  }
+
+  _toggleShowWidget = () => {
+    this.setState({
+      shouldShowWidget: !this.state.shouldShowWidget
+    });
+  }
+
 }
+
 
 export default App;
